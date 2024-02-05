@@ -1,0 +1,19 @@
+name: home-assistent
+services:
+    home-assistant:
+        container_name: homeassistant-3
+        privileged: true
+        restart: unless-stopped
+        environment:
+            - TZ=Europe/Berlin
+        volumes:
+            - /share/Container-shares/homeassistant:/config
+        networks:
+            qnet-static-eth0-xxxx:
+                ipv4_address: xxx.xxx.xxx.xxx
+        mac_address: 02:42:c0:a8:fa:0b
+        image: homeassistant/home-assistant:latest
+networks:
+    qnet-static-eth0-xxxx:
+        external: true
+        name: qnet-static-eth0-xxxx

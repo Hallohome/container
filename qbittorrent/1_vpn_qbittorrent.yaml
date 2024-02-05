@@ -1,0 +1,21 @@
+name: vpn_qbittorrent
+services:
+    gluetun:
+        stdin_open: true
+        tty: true
+        restart: always
+        container_name: docker-openvpn-client-qb
+        cap_add:
+            - NET_ADMIN
+        ports:
+            - 8073:8073
+            - 56056:56056/tcp
+            - 56056:56056/udp
+        environment:
+            - FIREWALL_VPN_INPUT_PORTS=56056
+            - VPN_SERVICE_PROVIDER=mullvad
+            - VPN_TYPE=openvpn
+            - OPENVPN_USER=xxxxxxxxxxxx
+            - SERVER_COUNTRIES=Switzerland
+        image: qmcgaw/gluetun
+        

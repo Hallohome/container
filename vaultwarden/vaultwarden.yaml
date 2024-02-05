@@ -1,0 +1,26 @@
+name: vaultwarden
+services:
+    server:
+        container_name: vaultwarden-4
+        networks:
+            qnet-static-eth0-xxxx:
+                ipv4_address: xxx.xxx.xxx.xxx
+        mac_address: 02:42:c0:a8:fa:17
+        restart: always
+        environment:
+            - SIGNUPS_ALLOWED=false
+            - WEBSOCKET_ENABLED=true
+            - DOMAIN=https://vault.xxxx.xx
+            - SMTP_HOST=xxxx.de
+            - SMTP_FROM=vault@xxx.xx
+            - SMTP_PORT=465
+            - SMTP_SECURITY=force_tls
+            - SMTP_USERNAME=vault@xxxx.xx
+            - SMTP_PASSWORD=xxxxxx
+        volumes:
+            - /share/Container-shares/vaultwarden:/data/
+        image: vaultwarden/server:latest
+networks:
+    qnet-static-eth0-xxxx:
+        external: true
+        name: qnet-static-eth0-xxxx

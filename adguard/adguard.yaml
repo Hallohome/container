@@ -1,0 +1,17 @@
+name: adguard
+services:
+    adguardhome:
+        container_name: AdGuardHome-3
+        restart: unless-stopped
+        networks:
+            qnet-static-eth0-xxxx
+                ipv4_address: xxx.xxx.xxx.xxx
+        mac_address: 02:42:c0:a8:fa:0a
+        volumes:
+            - /share/Container-shares/adguardhome/work:/opt/adguardhome/work
+            - /share/Container-shares/adguardhome/conf:/opt/adguardhome/conf
+        image: adguard/adguardhome
+networks:
+    qnet-static-eth0-xxxx:
+        external: true
+        name: qnet-static-eth0-xxxx

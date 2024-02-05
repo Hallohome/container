@@ -1,0 +1,21 @@
+name: heimdall
+services:
+    heimdall:
+        container_name: heimdall-4
+        environment:
+            - PUID=1006
+            - PGID=1000
+            - TZ=Europe/Berlin
+        networks:
+            qnet-static-eth0-xxxx:
+                ipv4_address: xxx.xxx.xxx.xxx
+        mac_address: 02:42:c0:a8:fa:0d
+        volumes:
+            - /share/Container-shares/heimdall/config:/config
+        restart: always
+        shm_size: 256m
+        image: lscr.io/linuxserver/heimdall:latest
+networks:
+    qnet-static-eth0-xxxx:
+        external: true
+        name: qnet-static-eth0-xxxx

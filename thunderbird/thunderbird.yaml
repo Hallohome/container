@@ -1,0 +1,24 @@
+name: thunderbird
+services:
+    wanderbird:
+        restart: always
+        container_name: thunderbird-4
+        shm_size: 2GB
+        environment:
+            - TZ=Europe/Berlin
+            - LANG=de_DE.UTF-8
+            - LANGUAGE=de_DE:de
+            - KEYBOARD=de-de-qwertz
+            - PUID=0
+            - PGID=0
+        networks:
+            qnet-static-eth0-xxxx:
+                ipv4_address: xxx.xxx.xxx.xxx
+        mac_address: 02:42:c0:a8:fa:10
+        volumes:
+            - /share/Container-shares/thunderbird:/config
+        image: kebles/wanderbird
+networks:
+    qnet-static-eth0-xxxx:
+        external: true
+        name: qnet-static-eth0-xxxx

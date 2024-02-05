@@ -1,0 +1,17 @@
+name: proxy-manager
+services:
+    nginx-proxy-manager:
+        container_name: nginx-proxy-manager-3
+        mac_address: 02:42:c0:a8:fa:15
+        networks:
+            qnet-static-eth0-xxxx:
+                ipv4_address: xxx.xxx.xxx.xxx
+        restart: always
+        volumes:
+            - /share/Container-shares/nginx-proxy-manager/data:/data
+            - /share/Container-shares/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+        image: jc21/nginx-proxy-manager
+networks:
+    qnet-static-eth0-xxxx:
+        external: true
+        name: qnet-static-eth0-xxxx

@@ -1,0 +1,13 @@
+name: jdownloader
+services:
+    jdownloader-2:
+        container_name: jdownloader
+        shm_size: 2g
+        network_mode: jdownloader-vpn
+        environment:
+            - USER_ID=0
+            - GROUP_ID=0
+        volumes:
+            - /share/Container-shares/jdownloader:/config:rw
+            - /share/Download/JdownloaderDocker:/output:rw
+        image: jlesage/jdownloader-2

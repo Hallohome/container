@@ -1,0 +1,15 @@
+name: qbittorrent
+services:
+    qbittorrent:
+        container_name: qbittorrent
+        network_mode: container:docker-openvpn-client-qb
+        environment:
+            - PUID=1006
+            - PGID=100
+            - TZ=Europe/Berlin
+            - WEBUI_PORT=8073
+        volumes:
+            - /share/Container-shares/qb/config:/config
+            - /share/Container-shares/qb/downloads:/downloads
+        restart: unless-stopped
+        image: lscr.io/linuxserver/qbittorrent:latest

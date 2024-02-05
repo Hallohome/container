@@ -1,0 +1,19 @@
+name: ubuntu-desktop
+services:
+    desktop:
+        container_name: ubuntu-desktop-2
+        stdin_open: true
+        tty: true
+        networks:
+            qnet-static-eth0-xxxx:
+                ipv4_address: xxx.xxx.xxx.xxx
+        restart: always
+        mac_address: 02:42:c0:a8:fa:16
+        shm_size: 512m
+        environment:
+            - VNC_PW=xxxx
+        image: kasmweb/desktop:1.12.0
+networks:
+    qnet-static-eth0-xxxxx:
+        external: true
+        name: qnet-static-eth0-xxxx

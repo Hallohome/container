@@ -1,0 +1,21 @@
+name: wikijs
+services:
+    wikijs:
+        restart: always
+        container_name: wikijs-2
+        networks:
+            qnet-static-eth0-xxxx:
+                ipv4_address: xxx.xxx.xxx.xxx
+        mac_address: 02:42:c0:a8:fa:0f
+        environment:
+            - PUID=1006
+            - PGID=100
+            - TZ=Europe/Berlin
+        volumes:
+            - /share/Container-shares/wikijs/config:/config
+            - /share/Container-shares/wikijs/data:/data
+        image: lscr.io/linuxserver/wikijs:latest
+networks:
+    qnet-static-eth0-xxxx:
+        external: true
+        name: qnet-static-eth0-xxxx

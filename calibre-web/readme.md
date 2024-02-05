@@ -1,0 +1,3 @@
+Calibre-web:
+
+docker run -d --name=calibre-web-3 --network=qnet-static-eth0-xxxx --ip xxx.xxx.xxx.xxx --mac-address=02:42:c0:a8:fa:13 -e PUID=1006 -e PGID=100 -e TZ=Europe/Berlin -e DOCKER_MODS=linuxserver/mods:universal-calibre -e OAUTHLIB_RELAX_TOKEN_SCOPE=1 -v /share/Container-shares/calibre/config:/config -v /share/Container-shares/calibre/library:/books --restart always lscr.io/linuxserver/calibre-web:latest

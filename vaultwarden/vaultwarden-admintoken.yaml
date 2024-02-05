@@ -1,0 +1,16 @@
+name: vaultwarden
+services:
+    server:
+        container_name: vaultwarden-2
+        networks:
+            qnet-static-eth0-xxxx:
+                ipv4_address: xxx.xxx.xxx.xxx
+        environment:
+            - ADMIN_TOKEN=xxxxxxxxxx
+        volumes:
+            - /share/Container-shares/vaultwarden:/data/
+        image: vaultwarden/server:latest
+networks:
+    qnet-static-eth0-xxxx:
+        external: true
+        name: qnet-static-eth0-xxxx

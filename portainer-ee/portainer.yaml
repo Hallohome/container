@@ -1,0 +1,13 @@
+name: portainer
+services:
+    portainer-ee:
+        ports:
+            - 49155:8000
+            - 49154:9000
+            - 49153:9443
+        container_name: portainer-ee-2
+        restart: always
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /share/Container-shares/portainer-ee:/data
+        image: portainer/portainer-ee:latest
