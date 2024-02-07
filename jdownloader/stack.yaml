@@ -1,0 +1,32 @@
+version: "3.9"
+
+name: jdownloader-vpn
+services:
+    gluetun:
+        stdin_open: true
+        tty: true
+        restart: always
+        container_name: jdownloader-vpn
+        cap_add:
+            - NET_ADMIN
+        ports:
+            - 49167:5800
+            - 49166:5900
+        environment:
+            - VPN_SERVICE_PROVIDER=mullvad
+            - VPN_TYPE=openvpn
+            - OPENVPN_USER=xxxxxxxxxxxxxx
+            - SERVER_COUNTRIES=Switzerland
+        image: qmcgaw/gluetun
+
+    jdownloader-2:
+        container_name: jdownloader
+        shm_size: 2g
+        network_mode: service:gluetun 
+        environment:
+            - USER_ID=0
+            - GROUP_ID=0
+        volumes:
+            - /share/Container-shares/jdownloader:/config:rw
+            - /share/Download/JdownloaderDocker:/output:rw
+        image: jlesage/jdownloader-2
