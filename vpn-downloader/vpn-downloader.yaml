@@ -1,0 +1,51 @@
+version: "3.9"
+
+name: mullvad-vpn
+services:
+    gluetun:
+        stdin_open: true
+        tty: true
+        restart: always
+        container_name: mullvad-vpn
+        cap_add:
+            - NET_ADMIN
+        ports:
+            - 8073:8073
+            - 49167:5800
+            - 49166:5900
+            - 56056:56056/tcp
+            - 56056:56056/udp
+        environment:
+            - FIREWALL_VPN_INPUT_PORTS=56056
+            - VPN_SERVICE_PROVIDER=mullvad
+            - VPN_TYPE=openvpn
+            - OPENVPN_USER=xxxxxxxxxxxxx
+            - SERVER_COUNTRIES=Switzerland
+        image: qmcgaw/gluetun
+
+    jdownloader-2:
+        restart: always
+        container_name: jdownloader
+        shm_size: 2g
+        network_mode: service:gluetun 
+        environment:
+            - USER_ID=0
+            - GROUP_ID=0
+        volumes:
+            - /share/Container-shares/jdownloader:/config:rw
+            - /share/Download/JdownloaderDocker:/output:rw
+        image: jlesage/jdownloader-2
+
+    qbittorrent:
+        container_name: qbittorrent
+        network_mode: service:gluetun
+        environment:
+            - PUID=1006
+            - PGID=100
+            - TZ=Europe/Berlin
+            - WEBUI_PORT=8073
+        volumes:
+            - /share/Container-shares/qb/config:/config
+            - /share/Container-shares/qb/downloads:/downloads
+        restart: always
+        image: lscr.io/linuxserver/qbittorrent:latest
