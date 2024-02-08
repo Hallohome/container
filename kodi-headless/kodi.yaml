@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  kodi:
+   image: fhriley/kodi-headless-novnc:Nexus
+   restart: always
+   init: true
+   shm_size: 2GB
+   ports:
+     - "5900:5900/tcp"
+     - "8000:8000/tcp"
+     - "8080:8080/tcp"
+     - "9090:9090/tcp"
+     - "9777:9777/udp"
+   environment:
+     KODI_DB_HOST: xxx.xxx.xxx.xxx
+     KODI_DB_USER: xbmc
+     KODI_DB_PASS: xbmc
+     TZ: Europe/Berlin
+     KODI_UID: 1006
+     KODI_GID: 100
+
+   volumes:
+     - /share/Container-shares/kodihead:/data
